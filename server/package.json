@@ -1,0 +1,25 @@
+{
+  "name": "my-express-app",
+  "version": "1.0.0",
+  "description": "An Express app to import and export data to a PostgreSQL database",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "fast-csv": "^4.3.6",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.1",
+    "pg-promise": "^10.7.9",
+    "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
