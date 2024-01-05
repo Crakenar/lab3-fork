@@ -1,6 +1,6 @@
-# My Express App
+# Lab3
 
-This is a simple Express application that imports data from an XML file into a PostgreSQL database and exports data from the database. It uses Docker to run the application and the database in separate containers.
+Lab3 contains the implementation of laboratory workі on the discipline Deployment and development of information systems
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ This is a simple Express application that imports data from an XML file into a P
 
 2. Navigate to the project directory.
 
-3. Install the Node.js dependencies:
+3. Install the Node.js dependencies of the frontend and the backend:
 
 ```bash
 npm install
@@ -33,13 +33,13 @@ docker-compose build
 docker-compose up
 ```
 
-The application is now running at `http://localhost:3001`.
+The backend is now running at `http://localhost:3001`.
+The frontend is now running at `http://localhost:5173`.
+The database is now running at `http://localhost:7432`.
 
 ## Usage
 
-- To import data from an XML file into the database, send a POST request to `http://localhost:3001/import` with the XML file attached.
-
-- To export data from the database, send a GET request to `http://localhost:3001/export`. The data will be returned in the response.
+TBD
 
 ## Stopping the Application
 
