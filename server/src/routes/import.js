@@ -1,8 +1,12 @@
 const express = require('express');
-const router = express.Router();
-const importController = require('../controllers/importController');
-const auth = require('../middleware/auth');
 
-router.post('/', auth, importController.importData);
+const multer = require('multer');
+const upload = multer({ storage: multer.memoryStorage() })
+
+const router = express.Router();
+const { importData } = require('../controllers/importController');
+const authMiddleware = require('./../middleware/authMiddleware');
+
+router.post('/', upload.single('file'), authMiddleware, importData);
 
 module.exports = router;

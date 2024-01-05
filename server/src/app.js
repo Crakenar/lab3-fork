@@ -1,7 +1,7 @@
 const express = require('express');
 const corsConfig = require('./middleware/corsConfig');
 const cookieParser = require('cookie-parser');
-/* const importRoutes = require('./routes/import'); */
+const importRoutes = require('./routes/import');
 const exportRoutes = require('./routes/export');
 const User = require('./db/models/User');
 const errorHandler = require('./middleware/errorHandler')
@@ -21,7 +21,7 @@ db.connect();
 app.use(express.json());
 
 // Routes
-/* app.use('/import', importRoutes); */
+app.use('/api/import', importRoutes);
 
 app.use('/api/export', exportRoutes);
 
