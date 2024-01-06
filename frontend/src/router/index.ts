@@ -30,16 +30,19 @@ const routes: Array<RouteRecordRaw> = [
     path: '/import',
     name: 'import',
     component: ImportView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/export',
     name: 'export',
     component: ExportView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/data',
     name: 'data',
     component: DataView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/:pathMatch(.*)*',

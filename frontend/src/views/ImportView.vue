@@ -7,6 +7,7 @@
       <div class="form-group">
         <label for="upload-file-label" class="form-label">Uploaded file label:</label>
         <input name="upload-file-label" type="text" v-model="uploadedFileLabel" class="form-control">
+        <p v-if="uploadError" class="error">{{ uploadError }}</p>
       </div>
       <button type="submit" class="submit-btn">Upload</button>
     </form>
@@ -21,6 +22,7 @@ export default {
   setup() {
     const file = ref<File | null>(null);
     const uploadedFileLabel = ref<string>('');
+    const uploadError = ref<string>('');
 
     const onFileChange = (e: Event) => {
       const files = (e.target as HTMLInputElement).files;
@@ -30,23 +32,14 @@ export default {
     };
 
     const onSubmit = async () => {
-      if (!file.value) {
+      if (!file.value || !uploadedFileLabel.value) {
+        uploadError.value = 'Please select a file and enter a label';
         return;
       }
 
-      // eslint-disable-next-line no-debugger
-      debugger;
-
       const formData = new FormData();
-
-      if (file.value) {
-        console.log(file.value);
-        formData.append('file', file.value);
-      }
-
-      if(uploadedFileLabel.value) {
-        formData.append('fileName', uploadedFileLabel.value);
-      }
+      formData.append('file', file.value);
+      formData.append('fileName', uploadedFileLabel.value);
 
       try {
         const response = await http.post('/api/import/', formData, {
@@ -55,12 +48,13 @@ export default {
           },
         });
         console.log(response);
-      } catch (error) {
+      } catch (error: any) {
         console.error(error);
+        uploadError.value = error.message;
       }
     };
 
-    return { uploadedFileLabel, onFileChange, onSubmit};
+    return { uploadedFileLabel, uploadError, onFileChange, onSubmit};
   },
 };
 </script>
