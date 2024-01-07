@@ -2,6 +2,7 @@ version: '3'
 services:
   db:
     image: postgres
+    container_name: db
     environment:
       POSTGRES_DB: angryBeaverDB
       POSTGRES_USER: Norbert
