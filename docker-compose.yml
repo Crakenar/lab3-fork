@@ -12,14 +12,19 @@ services:
     - "7432:5432"
   app:
     build: ./server
+    image: server
+    container_name: server
     ports:
-      - "3001:3001"
+      - "3001:3000"
     depends_on:
       - db
     environment:
       DATABASE_URL: postgres://Norbert:Tjtn37Aintja36FY@db/angryBeaverDB
+      DOCKER_ENV: true
   frontend:
     build: ./frontend
+    image: frontend
+    container_name: frontend
     ports:
       - "5174:80"
 
