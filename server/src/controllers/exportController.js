@@ -14,7 +14,8 @@ const exportUsers = async (req, res) => {
 const getAvailableTables = async (req, res) => {
   try {
     const result = await DataExporter.getTables();
-    res.status(200).json(result.rows);
+    const returnedTables = result.map(t => t.table_name);
+    res.status(200).json(returnedTables);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
