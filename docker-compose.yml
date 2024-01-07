@@ -4,9 +4,9 @@ services:
     image: postgres
     container_name: db
     environment:
-      POSTGRES_DB: angryBeaverDB
-      POSTGRES_USER: Norbert
-      POSTGRES_PASSWORD: Tjtn37Aintja36FY
+      POSTGRES_DB: ''
+      POSTGRES_USER: ''
+      POSTGRES_PASSWORD: ''
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
@@ -20,7 +20,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://Norbert:Tjtn37Aintja36FY@db/angryBeaverDB
+      DATABASE_URL: ''
       DOCKER_ENV: true
   frontend:
     build: ./frontend
