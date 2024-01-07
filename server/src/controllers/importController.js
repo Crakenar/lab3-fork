@@ -1,33 +1,23 @@
-const fs = require('fs');
-const xml2js = require('xml2js');
+const DataImporter = require('./../db/models/Import');
 
 exports.importData = async (req, res) => {
-  console.log('importData is called');
-  /* const parser = new xml2js.Parser();
-  fs.readFile(__dirname + '/data.xml', async (err, data) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    parser.parseString(data, async (err, result) => {
-      if (err) {
-        return res.status(500).send(err);
-      }
-      const client = await pool.connect();
-      try {
-        await client.query('BEGIN');
-        const insertText = 'INSERT INTO table_name(column1, column2) VALUES($1, $2)';
-        for (let item of result.root.record) {
-          const insertValues = [item.field1[0], item.field2[0]];
-          await client.query(insertText, insertValues);
-        }
-        await client.query('COMMIT');
-      } catch (e) {
-        await client.query('ROLLBACK');
-        throw e;
-      } finally {
-        client.release();
-      }
-      res.status(200).send('Data imported successfully');
-    });
-  }); */
+
+  const data = JSON.parse(req.file.buffer.toString()); 
+  const columns = Object.keys(data[0]);
+  const tableName = req.body.fileName;
+
+  try {
+    await DataImporter.createTable(tableName, columns);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error creating table');
+  }
+
+  try {
+    await DataImporter.insertData(tableName, columns, data);
+    res.status(200).send('Table created successfully and data inserted!');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error inserting values');
+  }
 };
