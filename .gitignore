@@ -28,3 +28,8 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+.env
+
+# files uploaded to the server
+server/uploads/*
