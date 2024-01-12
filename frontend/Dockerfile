@@ -1,6 +1,12 @@
 # Step 1: Use a node base image
 FROM node:20 as build-stage
 
+# Pass build-time variables
+ARG VITE_API_URL_DOCKER
+
+# Set the environment variable
+ENV VITE_API_URL_DOCKER=$VITE_API_URL_DOCKER
+
 # Set the working directory in the Docker container
 WORKDIR /frontend
 
@@ -18,6 +24,9 @@ RUN npm run build
 
 # Step 2: Setup the server
 FROM nginx:stable as production-stage
+
+# Copy nginx configuration file
+COPY --from=build-stage /frontend/default.conf /etc/nginx/conf.d/default.conf
 
 # Copy the built app from the build-stage to the default nginx directory
 COPY --from=build-stage /frontend/dist /usr/share/nginx/html

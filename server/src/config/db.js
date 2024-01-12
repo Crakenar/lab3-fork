@@ -1,6 +1,14 @@
-require('dotenv').config();
+const isDocker = process.env.DOCKER_ENV === 'true';
+
+if (isDocker){
+  require('dotenv').config();
+  console.log('docker env');
+} else {
+  require('dotenv').config({ path: '../.env' });
+  console.log('local env');
+}
+
 const { Pool } = require('pg');
-const isDocker = process.env.DOCKER_ENV || false;
 
 const pool = new Pool({
   user: process.env.DB_USER,
