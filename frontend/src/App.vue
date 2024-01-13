@@ -4,6 +4,7 @@
       <h1>Labs</h1>
       <nav v-if="!isLoggedIn">
         <RouterLink to="/login">Login</RouterLink>
+        <RouterLink to="/register">Register</RouterLink>
       </nav>
       <nav v-else>
         <RouterLink to="/">Home</RouterLink>

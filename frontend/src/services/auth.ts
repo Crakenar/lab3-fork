@@ -1,10 +1,6 @@
 import http from '../http-common';
-
-interface User {
-  username: string;
-  password: string;
-}
-
+import { type User, type UserRegister} from '@/interfaces/authInterfaces';
+import cookieService from '@/services/cookie'; 
 export function login(user: User) {
   return http
     .post('api/auth/login', {
@@ -12,6 +8,20 @@ export function login(user: User) {
       password: user.password
     })
     .then((response: { data: any; }) => {
+      cookieService.setCookie('jwt', response.data.token, 1);
+      return response.data;
+    });
+}
+
+export function register(user: UserRegister) {
+  return http
+    .post('api/auth/register', {
+      username: user.username,
+      email: user.email,
+      password: user.password
+    })
+    .then((response: { data: any; }) => {
+      cookieService.setCookie('jwt', response.data.token, 1);
       return response.data;
     });
 }

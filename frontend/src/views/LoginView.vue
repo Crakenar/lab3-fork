@@ -62,6 +62,10 @@ const handleLogin = () => {
   background-color: white;
 }
 
+.login-form h2 {
+  color: rgba(0, 0, 0, 0.6)
+}
+
 .input-group {
   margin-bottom: 15px;
   padding: 0.5rem 0;
@@ -69,6 +73,7 @@ const handleLogin = () => {
 
 .input-group label {
   margin-right: 10px;
+  color: rgba(0, 0, 0, 0.6)
 }
 
 .input-group input {
